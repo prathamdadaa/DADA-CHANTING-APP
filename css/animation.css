@@ -1,0 +1,44 @@
+/* ─────────────────────────────────────────
+   animations.css — Dada Chanting App
+   All @keyframes and animation utilities
+───────────────────────────────────────── */
+
+/* ── Chant button pulse ── */
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+/* ── Sound wave bars ── */
+@keyframes wave {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(0.35); }
+}
+
+/* ── Screen fade-in ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.screen.active {
+  animation: fadeIn 0.18s ease;
+}
+
+/* ── Bead pop (applied via JS) ── */
+@keyframes beadPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+.bead.pop {
+  animation: beadPop 0.2s ease;
+}
+
+/* ── Respect reduced-motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

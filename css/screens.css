@@ -1,0 +1,16 @@
+/* ─────────────────────────────────────────
+   screens.css — Dada Chanting App
+   Screen-specific layout overrides that
+   are too narrow to live in components.css
+───────────────────────────────────────── */
+
+/* ── Home screen ── */
+#screen-home .guest-banner { }  /* inherits from components */
+
+/* ── Profile screen ── */
+#screen-profile .user-bar {
+  padding: var(--space-4);
+}
+#screen-profile .stats-grid {
+  margin-bottom: var(--space-3);
+}

@@ -1,0 +1,273 @@
+/* ─────────────────────────────────────────
+   layout.css — Dada Chanting App
+   App shell, screen system, navigation,
+   grid helpers, spacing utilities
+───────────────────────────────────────── */
+
+/* ── App shell ── */
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0.5rem 0.5rem 5rem;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ── Header ── */
+.app-header {
+  background: linear-gradient(135deg, var(--saffron-500) 0%, var(--saffron-400) 50%, var(--saffron-gold) 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  margin-bottom: var(--space-3);
+  position: relative;
+  overflow: hidden;
+}
+
+.header-om {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0.25;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.header-om.left  { left: var(--space-4); }
+.header-om.right { right: var(--space-4); }
+
+.header-center { position: relative; z-index: 1; }
+
+.header-title {
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  margin-bottom: 2px;
+}
+.header-sub {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Screen system ── */
+.screen {
+  display: none;
+}
+.screen.active {
+  display: block;
+}
+
+/* ── Bottom navigation ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--color-bg-card);
+  border-top: 0.5px solid var(--color-border);
+  z-index: var(--z-overlay);
+}
+
+.nav-btn {
+  padding: var(--space-2) var(--space-1);
+  text-align: center;
+  border: none;
+  background: none;
+  transition: var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.nav-btn:hover    { background: var(--color-bg-surface); }
+.nav-btn.active   { background: var(--saffron-50); }
+
+.nav-btn i {
+  font-size: 20px;
+  color: var(--color-text-secondary);
+  display: block;
+}
+.nav-btn span {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+.nav-btn.active i,
+.nav-btn.active span { color: var(--saffron-500); }
+
+/* ── Generic card ── */
+.card {
+  background: var(--color-bg-card);
+  border: 0.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-3);
+}
+
+/* ── Stats grid (3 columns) ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.stat-card {
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.stat-num   { font-size: 26px; font-weight: 500; color: var(--saffron-500); }
+.stat-label { font-size: var(--font-size-xs); color: var(--color-text-secondary); }
+
+/* ── Mantra grid (2 columns) ── */
+.mantra-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+/* ── Section title ── */
+.section-title {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+/* ── Calendar grid ── */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+.cal-day {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: var(--color-text-secondary);
+}
+.cal-day.has-chant { background: var(--saffron-500); color: #fff; }
+.cal-day.today     { border: 1.5px solid var(--saffron-500); }
+
+/* ── History list ── */
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 0.5px solid var(--color-border);
+}
+.history-item:last-child { border-bottom: none; }
+.hist-icon  { font-size: 20px; width: 32px; text-align: center; }
+.hist-info  { flex: 1; }
+.hist-name  { font-size: var(--font-size-sm); font-weight: 500; color: var(--color-text-primary); }
+.hist-date  { font-size: var(--font-size-xs); color: var(--color-text-secondary); }
+.hist-count { font-size: 14px; font-weight: 500; color: var(--saffron-500); }
+
+/* ── Empty state ── */
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.8;
+}
+
+/* ── Modal overlay ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  width: 300px;
+}
+.modal-box h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+  color: var(--color-text-primary);
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gray-700);
+  color: #fff;
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: var(--z-toast);
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; }
+
+/* ── Auth form layout ── */
+.auth-box {
+  background: var(--color-bg-card);
+  border: 0.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-top: var(--space-3);
+}
+.auth-box h2 {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+.auth-box p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-5);
+}
+
+.field {
+  margin-bottom: var(--space-3);
+}
+.field label {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+.field input {
+  width: 100%;
+}
+
+.switch-link {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-3);
+}
+.switch-link a {
+  color: var(--saffron-500);
+  cursor: pointer;
+}
