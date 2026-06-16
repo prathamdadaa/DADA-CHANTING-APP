@@ -1,0 +1,104 @@
+/* ─────────────────────────────────────────
+   variables.css — Dada Chanting App
+   Design tokens: colors, spacing, radius,
+   typography, shadows, transitions
+───────────────────────────────────────── */
+
+:root {
+  /* ── Brand / Saffron palette ── */
+  --saffron-50:  #fff8f0;
+  --saffron-100: #ffe8cc;
+  --saffron-200: #ffd199;
+  --saffron-400: #f7931e;
+  --saffron-500: #FF6B35;
+  --saffron-600: #e0501a;
+  --saffron-gold: #FFD700;
+
+  /* ── Neutral grays ── */
+  --gray-50:  #f9f9f9;
+  --gray-100: #f2f2f2;
+  --gray-200: #e5e5e5;
+  --gray-300: #d4d4d4;
+  --gray-400: #a3a3a3;
+  --gray-500: #737373;
+  --gray-700: #404040;
+  --gray-900: #171717;
+
+  /* ── Semantic colors ── */
+  --color-success:  #22c55e;
+  --color-warning:  #f59e0b;
+  --color-danger:   #ef4444;
+  --color-info:     #3b82f6;
+
+  /* ── App surfaces ── */
+  --color-bg-page:    #f5f3ef;
+  --color-bg-card:    #ffffff;
+  --color-bg-surface: #f2f0ec;
+
+  /* ── Text ── */
+  --color-text-primary:   var(--gray-900);
+  --color-text-secondary: var(--gray-500);
+  --color-text-muted:     var(--gray-400);
+
+  /* ── Borders ── */
+  --color-border:       rgba(0, 0, 0, 0.10);
+  --color-border-hover: rgba(0, 0, 0, 0.20);
+
+  /* ── Border radius ── */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-full: 9999px;
+
+  /* ── Spacing scale ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ── Typography ── */
+  --font-size-xs:  11px;
+  --font-size-sm:  13px;
+  --font-size-md:  15px;
+  --font-size-lg:  18px;
+  --font-size-xl:  22px;
+  --font-size-2xl: 28px;
+  --font-size-3xl: 48px;
+  --font-size-4xl: 64px;
+
+  /* ── Shadows ── */
+  --shadow-sm:     0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:     0 4px 12px rgba(0,0,0,0.10);
+  --shadow-saffron: 0 4px 20px rgba(255, 107, 53, 0.35);
+
+  /* ── Transitions ── */
+  --transition-fast:   all 0.12s ease;
+  --transition-normal: all 0.2s ease;
+  --transition-slow:   all 0.3s ease;
+
+  /* ── Z-index layers ── */
+  --z-base:    1;
+  --z-overlay: 50;
+  --z-modal:   100;
+  --z-toast:   200;
+}
+
+/* ── Dark mode overrides ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-page:    #1a1714;
+    --color-bg-card:    #242018;
+    --color-bg-surface: #2d2822;
+
+    --color-text-primary:   #f5f3ef;
+    --color-text-secondary: #a09a8e;
+    --color-text-muted:     #6b6560;
+
+    --color-border:       rgba(255, 255, 255, 0.10);
+    --color-border-hover: rgba(255, 255, 255, 0.20);
+  }
+}
