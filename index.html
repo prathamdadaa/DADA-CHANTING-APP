@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dada Chanting App — By Pratham Dada</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/screens.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+</head>
+<body>
+
+  <div class="app" id="app">
+
+    <!-- ── HEADER ── -->
+    <header class="app-header">
+      <span class="header-om left" aria-hidden="true">🕉</span>
+      <div class="header-center">
+        <h1 class="header-title">🙏 Dada Chanting App</h1>
+        <p class="header-sub">By Pratham Dada — Jai Shri Ram 🌸</p>
+      </div>
+      <span class="header-om right" aria-hidden="true">🕉</span>
+    </header>
+
+    <!-- ══════════════════════════════════
+         SCREEN: HOME
+    ══════════════════════════════════ -->
+    <section class="screen active" id="screen-home" aria-label="Home">
+
+      <!-- Guest banner (shown when not logged in) -->
+      <div class="guest-banner" id="guest-banner">
+        <i class="ti ti-login banner-icon" aria-hidden="true"></i>
+        <div class="banner-text">
+          <strong>Sign in to backup your progress</strong>
+          <span>Your chants & streaks are saved locally</span>
+        </div>
+        <button class="btn-outline-saffron" onclick="UI.goScreen('auth')">Sign in</button>
+      </div>
+
+      <!-- User bar (shown when logged in) -->
+      <div id="user-bar-area"></div>
+
+      <!-- Streak stats -->
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card">
+          <span class="stat-num" id="streak-days">0</span>
+          <span class="stat-label">🔥 Day streak</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="total-chants">0</span>
+          <span class="stat-label">🙏 Total chants</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="today-chants">0</span>
+          <span class="stat-label">☀️ Today</span>
+        </div>
+      </div>
+
+      <p class="section-title">Choose your mantra</p>
+      <div class="mantra-grid" id="mantra-grid"></div>
+
+    </section>
+
+    <!-- ══════════════════════════════════
+         SCREEN: CHANT
+    ══════════════════════════════════ -->
+    <section class="screen" id="screen-chant" aria-label="Chanting">
+
+      <div class="chant-card">
+        <h2 class="chant-mantra-name" id="active-mantra-name">Ram Ram</h2>
+        <p class="chant-mantra-text" id="active-mantra-text">ॐ श्री राम जय राम जय जय राम</p>
+
+        <!-- Sound wave visualizer -->
+        <div class="sound-wave" id="sound-wave" aria-hidden="true">
+          <div class="wave-bar stopped"></div>
+          <div class="wave-bar stopped"></div>
+          <div class="wave-bar stopped"></div>
+          <div class="wave-bar stopped"></div>
+          <div class="wave-bar stopped"></div>
+          <div class="wave-bar stopped"></div>
+        </div>
+
+        <!-- Counter -->
+        <div class="big-counter" id="chant-counter" aria-live="polite">0</div>
+        <p class="target-line" id="target-line">Target: 108 chants</p>
+
+        <!-- Progress bar -->
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+
+        <!-- Mala beads -->
+        <div class="beads-row" id="beads-row" aria-label="Mala beads"></div>
+
+        <!-- Main chant button -->
+        <button class="chant-btn" id="chant-btn" onclick="ChantEngine.doChant()" aria-label="Chant">
+          🙏
+        </button>
+
+        <!-- Controls -->
+        <div class="chant-controls">
+          <button class="btn-ghost" onclick="ChantEngine.resetChant()">
+            <i class="ti ti-refresh" aria-hidden="true"></i> Reset
+          </button>
+          <button class="btn-outline-saffron" onclick="UI.openTargetModal()">
+            <i class="ti ti-target" aria-hidden="true"></i> Set target
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════
+         SCREEN: HISTORY
+    ══════════════════════════════════ -->
+    <section class="screen" id="screen-history" aria-label="History">
+
+      <div class="card">
+        <p class="section-title">This month — streak calendar</p>
+        <div class="calendar-grid" id="cal-grid" aria-label="30-day chanting calendar"></div>
+      </div>
+
+      <div class="card">
+        <p class="section-title">Recent chanting sessions</p>
+        <div id="history-list"></div>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════
+         SCREEN: PROFILE
+    ══════════════════════════════════ -->
+    <section class="screen" id="screen-profile" aria-label="Profile">
+      <div id="profile-content"></div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         SCREEN: AUTH (Login / Signup)
+    ══════════════════════════════════ -->
+    <section class="screen" id="screen-auth" aria-label="Sign in">
+      <div class="auth-box">
+        <h2 id="auth-title">Sign in</h2>
+        <p id="auth-sub">Login to sync &amp; backup your chanting data</p>
+
+        <div id="auth-name-field" class="field" style="display:none">
+          <label for="auth-name">Your name</label>
+          <input type="text" id="auth-name" placeholder="e.g. Pratham" autocomplete="name" />
+        </div>
+
+        <div class="field">
+          <label for="auth-email">Email</label>
+          <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+
+        <div class="field">
+          <label for="auth-pass">Password</label>
+          <input type="password" id="auth-pass" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+
+        <button class="btn-primary" id="auth-submit-btn" onclick="Auth.doAuth()">Sign in</button>
+
+        <p class="switch-link" id="auth-switch">
+          Don't have an account? <a href="#" onclick="Auth.toggleMode(); return false;">Create one</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         BOTTOM NAVIGATION
+    ══════════════════════════════════ -->
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="nav-btn active" id="nav-home" onclick="UI.goScreen('home')" aria-label="Home">
+        <i class="ti ti-home" aria-hidden="true"></i>
+        <span>Home</span>
+      </button>
+      <button class="nav-btn" id="nav-chant" onclick="UI.goScreen('chant')" aria-label="Chant">
+        <i class="ti ti-hand-stop" aria-hidden="true"></i>
+        <span>Chant</span>
+      </button>
+      <button class="nav-btn" id="nav-history" onclick="UI.goScreen('history')" aria-label="History">
+        <i class="ti ti-calendar" aria-hidden="true"></i>
+        <span>History</span>
+      </button>
+      <button class="nav-btn" id="nav-profile" onclick="UI.goScreen('profile')" aria-label="Profile">
+        <i class="ti ti-user" aria-hidden="true"></i>
+        <span>Profile</span>
+      </button>
+    </nav>
+
+  </div><!-- /.app -->
+
+  <!-- ══════════════════════════════════
+       TOAST NOTIFICATION
+  ══════════════════════════════════ -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ══════════════════════════════════
+       TARGET MODAL
+  ══════════════════════════════════ -->
+  <div class="modal-overlay" id="target-modal" role="dialog" aria-modal="true" aria-label="Set chanting target">
+    <div class="modal-box">
+      <h3>Set daily target</h3>
+      <div class="target-options" id="target-options">
+        <button class="t-opt" onclick="ChantEngine.setTarget(27)">27</button>
+        <button class="t-opt selected" onclick="ChantEngine.setTarget(108)">108</button>
+        <button class="t-opt" onclick="ChantEngine.setTarget(216)">216</button>
+        <button class="t-opt" onclick="ChantEngine.setTarget(324)">324</button>
+        <button class="t-opt" onclick="ChantEngine.setTarget(432)">432</button>
+        <button class="t-opt" onclick="ChantEngine.setTarget(1008)">1008</button>
+      </div>
+      <button class="btn-primary" onclick="UI.closeTargetModal()">Done</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       JAVASCRIPT MODULES (load order matters)
+  ══════════════════════════════════ -->
+  <script src="js/mantras.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/chant-engine.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
